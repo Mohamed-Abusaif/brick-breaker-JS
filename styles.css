@@ -31,16 +31,16 @@ canvas {
 
 /* Paddle Styling */
 .paddle {
-    background-color: #4caf50; /* Green */
+    background-color: #4caf50; 
 }
 
 /* Ball Styling */
 .ball {
-    background-color: #ff5722; /* Orange-Red */
+    background-color: #ff5722; 
 }
 
 /* Bricks */
 .brick {
-    background-color: #03a9f4; /* Blue */
+    background-color: #03a9f4; 
     border-radius: 4px;
 }
