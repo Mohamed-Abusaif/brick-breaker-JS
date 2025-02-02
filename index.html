@@ -10,11 +10,22 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const difficulty = urlParams.get("difficulty") || "easy"; // Default to "easy" 
+        
     </script>
 
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <!-- <audio autoplay loop>
+        <source src="./Polka ident.ogg" type="audio/ogg">
+    </audio> -->
+    <canvas id="gameCanvas"></canvas>
+    <div id="loseMessage" style="display: none; text-align: center;">
+        <p>Game Over!</p>
+        <button id="restartButton" style="display: none;" onclick="restartGame()">Restart</button>
+    </div>
+    <div id="particles-js"></div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module" src="main.js"></script>
 </body>
 </html>
