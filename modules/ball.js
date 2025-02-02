@@ -1,6 +1,6 @@
 // ball.js
-export const ballWidth = 10;
-export const ballHeight = 10;
+export const ballWidth = 15;
+export const ballHeight = 15;
 export const ballVelocityX = 3;
 export const ballVelocityY = 2;
 
@@ -25,7 +25,7 @@ export function updateBall(canvasWidth, canvasHeight) {
         ball.velocityY *= -1;
     }
     if (ball.y + ball.height >= canvasHeight) {
-        alert("Game Over!");
+       // alert("Game Over!");
         document.location.reload();
     }
 }
