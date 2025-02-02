@@ -9,8 +9,8 @@ const board = document.getElementById("gameCanvas");
 const difficulty = localStorage.getItem('selectedDifficulty') || 'easy';
 console.log(difficulty);
 const context = board.getContext("2d");
-const boardWidth = 500;
-const boardHeight = 500;
+const boardWidth = 750;
+const boardHeight = 750;
 
 board.width = boardWidth;
 board.height = boardHeight;

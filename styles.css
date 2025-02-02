@@ -41,7 +41,6 @@ canvas {
 
 /* Bricks */
 .brick {
-    /* background-color: #03a9f4;  */
-    background-color: black;
+    background-color: #03a9f4; 
     border-radius: 4px;
 }

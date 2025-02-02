@@ -3,6 +3,9 @@ import { player, movePlayer } from "./player.js";
 import { ball, updateBall } from "./ball.js";
 import { blockArray, createBlocks } from "./block.js";
 import { detectCollision } from "./utils.js";
+
+const difficulty = localStorage.getItem('selectedDifficulty') || 'easy';
+
  
 let score = 0;
 let gameOver = false;

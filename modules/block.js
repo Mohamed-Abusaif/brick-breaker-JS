@@ -1,6 +1,6 @@
 // block.js
-export const blockWidth = 50;
-export const blockHeight = 10;
+export const blockWidth = 80;
+export const blockHeight = 15;
 export const blockColumns = 8;
 export let blockRows = 3;
 export const blockMaxRows = 10;
