@@ -212,7 +212,9 @@
         function startGame() {
             document.location.href = "./index.html";
             const difficulty = document.getElementById("difficulty").value;
-            document.location.href = `./index.html?difficulty=${difficulty}`;
+            localStorage.setItem('selectedDifficulty', difficulty); // Store in localStorage
+            //document.location.href = `./index.html?difficulty=${difficulty}`;
+
         }
     </script>
    
