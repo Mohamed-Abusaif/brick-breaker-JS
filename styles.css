@@ -1,0 +1,46 @@
+/* General Styles */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Canvas Styling */
+canvas {
+    background-color: #1e1e1e;
+    border: 2px solid #ffffff;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+/* Text Styling */
+.score {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+/* Paddle Styling */
+.paddle {
+    background-color: #4caf50; /* Green */
+}
+
+/* Ball Styling */
+.ball {
+    background-color: #ff5722; /* Orange-Red */
+}
+
+/* Bricks */
+.brick {
+    background-color: #03a9f4; /* Blue */
+    border-radius: 4px;
+}
