@@ -57,20 +57,38 @@ function createUniformGrid() {
     }
 }
 
+// function createStaggeredGrid() {
+//     for (let r = 0; r < blockRows; r++) {
+//         for (let c = 0; c < blockColumns; c++) {
+//             // Offset every other row by half the column width
+//             const offsetX = (r % 2) * (blockWidth / 2 + 5); // +5 for spacing
+//             // Skip last column in odd rows to prevent overflow
+//             if (r % 2 === 1 && c === blockColumns - 1) continue;
+//             blockArray.push({
+//                 x: 15 + c * (blockWidth + 10) + offsetX,
+//                 y: 45 + r * (blockHeight + 10),
+//                 width: blockWidth,
+//                 height: blockHeight,
+//                 break: false
+//             });
+//         }
+//     }
+// }
+
 function createStaggeredGrid() {
     for (let r = 0; r < blockRows; r++) {
         for (let c = 0; c < blockColumns; c++) {
-            // Offset every other row by half the column width
-            const offsetX = (r % 2) * (blockWidth / 2 + 5); // +5 for spacing
+            // Use createBlock to inherit color logic
+            const block = createBlock(c, r);
+            
+            // Apply staggered offset
+            const offsetX = (r % 2) * (blockWidth / 2 + 5);
+            block.x += offsetX;
+
             // Skip last column in odd rows to prevent overflow
             if (r % 2 === 1 && c === blockColumns - 1) continue;
-            blockArray.push({
-                x: 15 + c * (blockWidth + 10) + offsetX,
-                y: 45 + r * (blockHeight + 10),
-                width: blockWidth,
-                height: blockHeight,
-                break: false
-            });
+
+            blockArray.push(block);
         }
     }
 }
@@ -92,6 +110,8 @@ function createBlock(c, r) {
         y: 45 + r * (blockHeight + 10),
         width: blockWidth,
         height: blockHeight,
-        break: false
+        //break: false,
+        hits: 0,
+        color: r % 2 === 0 ? "#B76E79" : "#9370DB" // Row-based color alternation
     };
 }
