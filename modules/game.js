@@ -3,46 +3,89 @@ import { player, movePlayer } from "./player.js";
 import { ball, updateBall } from "./ball.js";
 import { blockArray, createBlocks } from "./block.js";
 import { detectCollision } from "./utils.js";
-
+ 
 let score = 0;
 let gameOver = false;
+let ballSpeedx = 3;
+let ballSpeedy = 2;
+
+
+// Adjust parameters based on difficulty
+if (difficulty === "easy") {
+    ballSpeedx = 2;
+    ballSpeedy = 2;
+} else if (difficulty === "medium") {
+    ballSpeedx = 6;
+    ballSpeedy = 5;
+} else if (difficulty === "hard") {
+    ballSpeedx = 9;
+    ballSpeedy = 10;
+}
+
+// Apply ball speed blnsbaa lel Diffculty level
+ball.velocityX = ballSpeedx;
+ball.velocityY = ballSpeedy;
+
+
+
 
 export function updateGame(context, boardWidth, boardHeight) {
-    if (gameOver) return;
+    if (gameOver) {
+        return;
+    }
     
     context.clearRect(0, 0, boardWidth, boardHeight);
     
     // Draw player (paddle)
     context.fillStyle = "lightgreen";
     context.fillRect(player.x, player.y, player.width, player.height);
-    
-    // Update and draw ball
-    context.fillStyle = "white";
-    updateBall(boardWidth, boardHeight);
-    context.fillRect(ball.x, ball.y, ball.width, ball.height);
-    
-    // Check collision between ball and paddle
-    if (ball.y + ball.height >= player.y &&
-        ball.x + ball.width >= player.x &&
-        ball.x <= player.x + player.width) {
-        ball.velocityY *= -1;
+
+     // Update and draw ball
+    if (updateBall(boardWidth, boardHeight)) {
+        gameOver = true; // Set game over flag
+        return; // Stop further updates
     }
     
-    // Check collision between ball and blocks
-    for (let block of blockArray) {
-        if (!block.break && detectCollision(ball, block)) {
-            block.break = true;
-            ball.velocityY *= -1;
-            score += 100;
-        }
-        if (!block.break) {
-            context.fillRect(block.x, block.y, block.width, block.height);
-        }
+
+    // Draw ball as a circle
+    context.beginPath();
+    context.arc(ball.x + ball.width / 2, ball.y + ball.height / 2, ball.width / 2, 0, Math.PI * 2);
+    context.fillStyle = "red"; 
+    context.fill();
+    context.closePath();
+
+  // Check collision between ball and paddle
+  if (detectCollision(ball, player)) {
+    ball.velocityY *= -1;
+    ball.y = player.y - ball.height; // Prevent getting stuck
+}
+    
+    
+ // Check collision between ball and blocks
+ for (let block of blockArray) {
+    if (detectCollision(ball, block) && !block.break) {
+        block.break = true;
+        ball.velocityY *= -1;
+        score += 100;
+    }
+
+    // Always draw unbroken blocks
+    if (!block.break) {
+        context.fillStyle = "blue";
+        context.fillRect(block.x, block.y, block.width, block.height);
     }
 }
 
-export function resetGame() {
+
+
+}/// end of update 
+
+export function resetGame(boardWidth, boardHeight) {
     gameOver = false;
     score = 0;
+    ball.x = boardWidth / 2;
+    ball.y = boardHeight / 2;
+    ball.velocityX = 3;
+    ball.velocityY = 2;
     createBlocks();
 }

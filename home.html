@@ -7,7 +7,7 @@
     <title>Breakout Game</title>
    
     <style>
-       
+        
        
 
         body {
@@ -211,6 +211,8 @@
 
         function startGame() {
             document.location.href = "./index.html";
+            const difficulty = document.getElementById("difficulty").value;
+            document.location.href = `./index.html?difficulty=${difficulty}`;
         }
     </script>
    

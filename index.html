@@ -6,6 +6,12 @@
     <!-- style sheet -->
     <link rel="stylesheet" href="styles.css">
     <title>Brick-Breaker-JS</title>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const difficulty = urlParams.get("difficulty") || "easy"; // Default to "easy" 
+    </script>
+
 </head>
 <body>
     <canvas id="gameCanvas" width="800" height="600"></canvas>
