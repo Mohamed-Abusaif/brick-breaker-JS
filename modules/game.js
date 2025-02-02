@@ -6,6 +6,28 @@ import { detectCollision } from "./utils.js";
  
 let score = 0;
 let gameOver = false;
+let ballSpeedx = 3;
+let ballSpeedy = 2;
+
+
+// Adjust parameters based on difficulty
+if (difficulty === "easy") {
+    ballSpeedx = 2;
+    ballSpeedy = 2;
+} else if (difficulty === "medium") {
+    ballSpeedx = 6;
+    ballSpeedy = 5;
+} else if (difficulty === "hard") {
+    ballSpeedx = 9;
+    ballSpeedy = 10;
+}
+
+// Apply ball speed blnsbaa lel Diffculty level
+ball.velocityX = ballSpeedx;
+ball.velocityY = ballSpeedy;
+
+
+
 
 export function updateGame(context, boardWidth, boardHeight) {
     if (gameOver) {
