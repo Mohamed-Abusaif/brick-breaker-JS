@@ -52,7 +52,7 @@ export function updateGame(context, boardWidth, boardHeight) {
     context.clearRect(0, 0, boardWidth, boardHeight);
     
     // Draw player (paddle)
-    context.fillStyle = "#ADD8E6";
+    context.fillStyle = player.color;
     context.fillRect(player.x, player.y, player.width, player.height);
 
      // Update and draw ball
