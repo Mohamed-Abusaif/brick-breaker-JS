@@ -1,9 +1,20 @@
 import { player, movePlayer } from "./player.js";
 import { ball, updateBall } from "./ball.js";
-import { blockArray, createBlocks } from "./block.js";
+import { blockArray, createBlocks,blockColumns ,blockRows } from "./block.js";
 import { detectCollision } from "./utils.js";
 
-const difficulty = localStorage.getItem('selectedDifficulty') || 'easy';
+ document.addEventListener("DOMContentLoaded", function () {
+     const difficulty = localStorage.getItem('selectedDifficulty') || 'hard';
+     const difficultyElement = document.getElementById('difficulty');
+
+   
+    
+     if (difficultyElement) {
+         difficultyElement.value = difficulty;
+     }
+ });
+
+
 
 let score = 0;
 let gameOver = false;

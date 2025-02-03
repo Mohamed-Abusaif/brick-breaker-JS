@@ -9,7 +9,7 @@ export let player = {
     width: playerWidth,
     height: playerHeight,
     velocityX: playerVelocityX,
-    color: "green"
+    color: "#c19a6b"
 };
 
 export function movePlayer(e, boardWidth) {

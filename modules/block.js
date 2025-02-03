@@ -1,29 +1,20 @@
-// block.js
 export const blockWidth = 80;
-export const blockHeight = 15;
-export const blockColumns = 8;
-export let blockRows = 3;
-export const blockMaxRows = 10;
+export const blockHeight = 22;
+ export let blockColumns = 8;
+export  let blockRows = 3;
 export let blockArray = [];
 
-// export function createBlocks() {
-//     blockArray = [];
-//     for (let c = 0; c < blockColumns; c++) {
-//         for (let r = 0; r < blockRows; r++) {
-//             blockArray.push({
-//                 x: 15 + c * blockWidth + c * 10,
-//                 y: 45 + r * blockHeight + r * 10,
-//                 width: blockWidth,
-//                 height: blockHeight,
-//                 break: false
-//             });
-//         }
-//     }
-// }
-
 export function createBlocks(difficulty) {
-    blockArray = [];
+    console.log('====================================');
+    console.log('Difficulty:', difficulty);  
+    
+    blockColumns = getColumnsByDifficulty(difficulty);
     blockRows = getRowsByDifficulty(difficulty);
+
+    console.log('Columns:', blockColumns);
+    console.log('Rows:', blockRows);
+
+    blockArray = [];
 
     switch(difficulty) {
         case 'easy':
@@ -38,14 +29,25 @@ export function createBlocks(difficulty) {
         default:
             createUniformGrid();
     }
+
+    console.log(`Blocks Created: Rows=${blockRows}, Columns=${blockColumns}`);
 }
 
-function getRowsByDifficulty(difficulty) {
+export function getRowsByDifficulty(difficulty) {
     switch(difficulty) {
-        case 'easy': return 3;
-        case 'medium': return 5;
-        case 'hard': return 8;
-        default: return 3;
+        case 'easy': return 8;
+        case 'medium': return 12;
+        case 'hard': return 15;
+        default: return 8;
+    }
+}
+
+export function getColumnsByDifficulty(difficulty) {
+    switch(difficulty) {
+        case 'easy': return 8;
+        case 'medium': return 12;
+        case 'hard': return 16;
+        default: return 8;
     }
 }
 
@@ -57,35 +59,14 @@ function createUniformGrid() {
     }
 }
 
-// function createStaggeredGrid() {
-//     for (let r = 0; r < blockRows; r++) {
-//         for (let c = 0; c < blockColumns; c++) {
-//             // Offset every other row by half the column width
-//             const offsetX = (r % 2) * (blockWidth / 2 + 5); // +5 for spacing
-//             // Skip last column in odd rows to prevent overflow
-//             if (r % 2 === 1 && c === blockColumns - 1) continue;
-//             blockArray.push({
-//                 x: 15 + c * (blockWidth + 10) + offsetX,
-//                 y: 45 + r * (blockHeight + 10),
-//                 width: blockWidth,
-//                 height: blockHeight,
-//                 break: false
-//             });
-//         }
-//     }
-// }
-
 function createStaggeredGrid() {
     for (let r = 0; r < blockRows; r++) {
         for (let c = 0; c < blockColumns; c++) {
-            // Use createBlock to inherit color logic
             const block = createBlock(c, r);
-            
-            // Apply staggered offset
+
             const offsetX = (r % 2) * (blockWidth / 2 + 5);
             block.x += offsetX;
 
-            // Skip last column in odd rows to prevent overflow
             if (r % 2 === 1 && c === blockColumns - 1) continue;
 
             blockArray.push(block);
@@ -96,13 +77,11 @@ function createStaggeredGrid() {
 function createCheckerboardGrid() {
     for (let r = 0; r < blockRows; r++) {
         for (let c = 0; c < blockColumns; c++) {
-            // Skip every other block in a checkerboard pattern
             if ((r + c) % 2 === 0) continue;
             blockArray.push(createBlock(c, r));
         }
     }
 }
-
 
 function createBlock(c, r) {
     return {
@@ -110,8 +89,8 @@ function createBlock(c, r) {
         y: 45 + r * (blockHeight + 10),
         width: blockWidth,
         height: blockHeight,
-        //break: false,
         hits: 0,
-        color: r % 2 === 0 ? "#B76E79" : "#9370DB" // Row-based color alternation
+        color: r % 2 === 0 ? "#77dd77" : "#c19a6b" // Soft green & warm brown
+
     };
 }

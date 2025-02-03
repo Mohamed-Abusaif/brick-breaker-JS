@@ -14,7 +14,7 @@ const boardHeight = 750;
 board.width = boardWidth;
 board.height = boardHeight;
 
-createBlocks(difficulty);
+// createBlocks(difficulty);
 
 document.addEventListener("keydown", (e) => movePlayer(e, boardWidth));
 document.addEventListener("keydown", (e) => { 
@@ -28,7 +28,7 @@ function gameLoop() {
 
 
 window.onload = () => {
-    createBlocks();
+    createBlocks(difficulty);
     gameLoop();
 };
 
