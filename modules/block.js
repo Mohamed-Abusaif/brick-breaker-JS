@@ -1,5 +1,5 @@
 export const blockWidth = 80;
-export const blockHeight = 22;
+export const blockHeight = 20;
  export let blockColumns = 8;
 export  let blockRows = 3;
 export let blockArray = [];
@@ -45,8 +45,8 @@ export function getRowsByDifficulty(difficulty) {
 export function getColumnsByDifficulty(difficulty) {
     switch(difficulty) {
         case 'easy': return 8;
-        case 'medium': return 12;
-        case 'hard': return 16;
+        case 'medium': return 8;
+        case 'hard': return 8;
         default: return 8;
     }
 }

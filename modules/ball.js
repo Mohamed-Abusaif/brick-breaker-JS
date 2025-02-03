@@ -1,11 +1,11 @@
-export const ballWidth = 15;
-export const ballHeight = 15;
-export const ballVelocityX = 3;
-export const ballVelocityY = 2;
+export let ballWidth = 15;
+export let ballHeight = 15;
+export let ballVelocityX = 3;
+export let ballVelocityY = 2;
 
 export let ball = {
-    x: 500 / 2,
-    y: 500 / 2,
+    x: 900 / 2,
+    y: 900 / 2,
     width: ballWidth,
     height: ballHeight,
     velocityX: ballVelocityX,
@@ -15,8 +15,32 @@ export let ball = {
 export let lives = 3;
 export let score = 0;
 
+export function setDifficulty(difficulty) {
+    if (difficulty === "easy") {
+        ballVelocityX = 2;
+        ballVelocityY = 2;
+        ballWidth = 20;
+        ballHeight = 20;
+    } else if (difficulty === "medium") {
+        ballVelocityX = 5;
+        ballVelocityY = 5;
+        ballWidth = 15;
+        ballHeight = 15;
+    } else if (difficulty === "hard") {
+        ballVelocityX = 8;
+        ballVelocityY = 8;
+        ballWidth = 10;
+        ballHeight = 10;
+    }
+
+    ball.velocityX = ballVelocityX;
+    ball.velocityY = ballVelocityY;
+    ball.width = ballWidth;
+    ball.height = ballHeight;
+}
+
 export function updateBall(canvasWidth, canvasHeight) {
-    if (lives <= 0) return; // Prevent further actions if lives are zero or negative
+    if (lives <= 0) return; 
     
     ball.x += ball.velocityX;
     ball.y += ball.velocityY;
@@ -50,15 +74,13 @@ export function lose() {
     }
 }
 
-export function restartGame() {
+export function restartGame(difficulty) {
     lives = 3;
     score = 0;
+    setDifficulty(difficulty);
     updateLivesDisplay();
     updateScoreDisplay();
-    ball.x = 500 / 2;
-    ball.y = 500 / 2;
-    ball.velocityX = ballVelocityX;
-    ball.velocityY = ballVelocityY;
+    restartBallPosition(500, 500);
     document.getElementById("loseMessage").style.display = "none";
     document.getElementById("restartButton").style.display = "none";
 }
