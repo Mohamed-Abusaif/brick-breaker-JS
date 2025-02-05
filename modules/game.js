@@ -108,9 +108,11 @@ export function resetGame(boardWidth, boardHeight) {
   gameOver = false;
   gameWon = false;
   score = 0;
-  ball.x = boardWidth / 2;
-  //    ball.y = boardHeight / 2;
-  ball.y = boardHeight - ballHeight - 80;
+  //ball.x = boardWidth / 2;
+  ball.x = player.x + player.width / 2 - ball.width / 2;  // Center above player
+  //ball.y = boardHeight / 2;
+  //ball.y = boardHeight - ballHeight - 80;
+  ball.y = player.y - ball.height - 5; // Ball starts just above the player 
   ball.velocityX = 3;
   ball.velocityY = 2;
   createBlocks(difficulty);
