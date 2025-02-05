@@ -1,9 +1,8 @@
-/* General Styles */
 body {
-    background-image: url(gamebg.avif) ;
-   
-    background-size: cover;
-    color: #333333; /* Dark text for contrast */
+    background: linear-gradient(45deg, #020e21, #054152, #00ff90);
+    background-size: 400% 400%;
+    animation: gradientAnimation 8s ease infinite;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,155 +12,101 @@ body {
     flex-direction: column;
     overflow: hidden;
 }
-/* Animated gradient that moves */
+
 @keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* Canvas Styling */
 #gameCanvas {
-    background-color: #FFB26F;
-    border: 3px solid #ddd;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
+    background: #054152;
+    border: 5px solid #fff;
+    box-shadow: 0px 8px 24px rgba(255, 94, 58, 0.6);
+    border-radius: 20px;
     display: block;
     margin: 30px auto;
     position: relative;
-    width: 100%;
-    max-width: 850px;
+    width: 70%;
+    
     height: 700px;
     box-sizing: border-box;
+    z-index: 1;
 }
 
-
-
-/* Score Styling */
-.score {
+#scoreLivesContainer {
     position: absolute;
     top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 20px;
+    color: white;
     font-size: 22px;
-    font-weight: bold;
-    color: #ffcc00;
-    text-shadow: 0px 0px 5px rgba(255, 204, 0, 0.7);
+    display: flex;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 12px 24px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Paddle Styling */
-.paddle {
-    background-color: #4caf50;
+#scoreLivesContainer:hover {
+    transform: scale(1.05);
 }
 
-/* Ball Styling */
-.ball {
-    background-color: #ff5722;
-}
-
-/* Bricks */
-.brick {
-    background-color: #03a9f4;
-    border-radius: 5px;
-}
-
-/* Lose Message Styling */
 #loseMessage {
     display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(20, 20, 20, 0.245); /* Slightly lighter black */
-    width: 85%;  /* Larger Width */
-    max-width: 800px; /* More spacious */
-    height: 650px; /* Slightly taller */
+    background: rgba(20, 20, 20, 0.95);
+    width: 85%;
+    max-width: 600px;
+    height: 300px;
     padding: 35px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
-    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.7s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-/* Lose Message Text */
 #loseMessage p {
-    font-size: 30px; /* Bigger text */
+    font-size: 28px;
     font-weight: bold;
-    color: #ff3333; /* More vibrant red */
-    margin-bottom: 25px;
-    text-shadow: 0px 0px 12px rgba(255, 51, 51, 0.8);
-    letter-spacing: 1px;
+    color: #ff4747;
+    text-shadow: 0px 0px 14px rgba(255, 71, 71, 0.9);
+    margin-bottom: 20px;
+    animation: textPulse 1.5s infinite alternate;
 }
 
-/* Restart Button */
+@keyframes textPulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
 #restartButton {
     background: linear-gradient(135deg, #ffcc00, #ff9900);
     border: none;
-    padding: 14px 28px;
-    font-size: 22px; /* Slightly bigger */
+    padding: 16px 32px;
+    font-size: 22px;
     font-weight: bold;
     color: #121212;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
-    margin-top: 25px;
-    box-shadow: 0px 4px 10px rgba(255, 153, 0, 0.5);
+    box-shadow: 0px 6px 14px rgba(255, 153, 0, 0.5);
 }
 
-/* Button Hover Effect */
 #restartButton:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 6px 18px rgba(255, 153, 0, 0.8);
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0px 8px 18px rgba(255, 153, 0, 0.8);
 }
 
-/* Fade-In Animation */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -55%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
+    from { opacity: 0; transform: translate(-50%, -55%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
 }
-#scoreLivesContainer {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: end;
-    /* flex-flow: row-reverse; */
-    width:100%;
-    font-size: 20px;
-}
-
-#scoreDisplay,
-#livesDisplay {
-    background-color: rgba(0, 0, 0, 0.5); 
-    padding: 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); 
-}
-
-#scoreDisplay {
-    margin-right: 10px; /* Space between score and lives */
-}
-
-#livesDisplay {
-    margin-left: 10px; /* Space between score and lives */
-}
-

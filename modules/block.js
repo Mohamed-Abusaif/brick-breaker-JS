@@ -1,4 +1,4 @@
-export const blockWidth = 60;
+export const blockWidth = 80;
 export const blockHeight = 20;
  export let blockColumns = 8;
 export  let blockRows = 3;
@@ -85,13 +85,13 @@ function createCheckerboardGrid() {
 
 function createBlock(c, r) {
     return {
-        x: 10 + c * (blockWidth + 10),
+        x: 15 + c * (blockWidth + 10),
         y: 45 + r * (blockHeight + 10),
         width: blockWidth,
         height: blockHeight,
         hits: 0,
-        color: 'red', // Set the color to red
-        borderRadius: 100 // Rounded corners for the block
+        color: '#00ff90', // Set the color to red
+        borderRadius: 30 // Rounded corners for the block
     };
 }
 
