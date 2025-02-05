@@ -1,6 +1,10 @@
-import { restartGame } from "./modules/ball.js";
 import { createPlayer, movePlayer, player } from "./modules/player.js";
-import { ball, updateBall, setDifficulty } from "./modules/ball.js";
+import {
+  ball,
+  updateBall,
+  setDifficulty,
+  restartGame,
+} from "./modules/ball.js";
 import { createBlocks, blockArray } from "./modules/block.js";
 import { detectCollision } from "./modules/utils.js";
 
@@ -77,37 +81,23 @@ export function updateGame(context, boardWidth, boardHeight) {
   }
 
   for (let block of blockArray) {
-    // Check for collision between the ball and the block
-    if (detectCollision(ball, block)) {
-      if (block.hits === -1) {
-        // Black blocks (unbreakable) just make the ball bounce
-        ball.velocityY *= -1;
-        // Do not change any state of the black block (don't increase hits or color)
-        continue;
-      }
-  
-      // For breakable blocks, increase the hit count and update state
+    if (detectCollision(ball, block) && block.hits < 2) {
       block.hits += 1;
       ball.velocityY *= -1;
       hitSound.play();
-  
-      if (block.hits === 2) {
-        // Update score when block is fully destroyed
+
+      if (block.hits == 2) {
         score += scoreIncrement;
       }
     }
-  
-    // Draw blocks, ensuring black blocks are not affected
-    if (block.hits < 2 || block.hits === -1) {
-      // If the block is unbreakable (black), keep its original color
+
+    if (block.hits < 2) {
       context.fillStyle = block.hits === 1 ? "white" : block.color;
       context.fillRect(block.x, block.y, block.width, block.height);
     }
   }
-  
-  const allBlocksDestroyed = blockArray.every(
-    (block) => block.hits >= 2 || block.hits === -1
-  );
+
+  const allBlocksDestroyed = blockArray.every((block) => block.hits >= 2);
   if (allBlocksDestroyed) {
     gameWon = true;
     gameOver = true;
@@ -127,9 +117,10 @@ export function resetGame(boardWidth, boardHeight) {
   ball.velocityY = 2;
   createBlocks(difficulty);
   createPlayer(difficulty);
-  updateScoreDisplay();
+  restartGame(difficulty);
 }
 
+// Initialize Game
 window.onload = () => {
   createBlocks(difficulty);
   createPlayer(difficulty);
@@ -142,7 +133,7 @@ document.addEventListener("keydown", (e) => movePlayer(e, boardWidth));
 document.getElementById("scoreDisplay").innerText = `Score: 0`;
 
 // Restart Game
-window.restartGame = restartGame;
+window.resetGame = resetGame;
 
 // Difficulty Selection
 document.addEventListener("DOMContentLoaded", function () {
