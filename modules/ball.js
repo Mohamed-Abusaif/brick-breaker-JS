@@ -110,5 +110,5 @@ export function restartBallPosition(canvasWidth, canvasHeight) {
     setTimeout(() => {
         ball.velocityX = ballVelocityX;
         ball.velocityY = ballVelocityY;
-    }, 2000);
+    }, 200);
 }

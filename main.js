@@ -25,6 +25,12 @@ function gameLoop() {
     updateGame(context, boardWidth, boardHeight);
     requestAnimationFrame(gameLoop);
 }
+function drawBlocks(context) {
+    blockArray.forEach(block => {
+        context.fillStyle = block.color;
+        context.fillRect(block.x, block.y, block.width, block.height);
+    });
+}
 
 
 window.onload = () => {
@@ -33,3 +39,5 @@ window.onload = () => {
 };
 
 window.restartGame = restartGame;
+
+
