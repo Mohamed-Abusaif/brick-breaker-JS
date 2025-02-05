@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-    background-image: url(./th.jpeg) ;
+    background-image: url(gamebg.avif) ;
    
     background-size: cover;
     color: #333333; /* Dark text for contrast */
@@ -28,7 +28,7 @@ body {
 
 /* Canvas Styling */
 #gameCanvas {
-    background-color: #dddddd87;
+    background-color: #FFB26F;
     border: 3px solid #ddd;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
