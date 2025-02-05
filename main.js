@@ -1,11 +1,11 @@
-import { restartGame } from "./modules/ball.js"; 
-import { player, movePlayer } from "./modules/player.js";
+import { restartGame } from "./modules/ball.js";
+import { createPlayer, movePlayer } from "./modules/player.js";
 import { ball } from "./modules/ball.js";
 import { createBlocks } from "./modules/block.js";
 import { updateGame, resetGame } from "./modules/game.js";
 
 const board = document.getElementById("gameCanvas");
-const difficulty = localStorage.getItem('selectedDifficulty') || 'easy';
+const difficulty = localStorage.getItem("selectedDifficulty") || "easy";
 console.log(difficulty);
 const context = board.getContext("2d");
 const boardWidth = 750;
@@ -17,13 +17,13 @@ board.height = boardHeight;
 // createBlocks(difficulty);
 
 document.addEventListener("keydown", (e) => movePlayer(e, boardWidth));
-document.addEventListener("keydown", (e) => { 
-    if (e.code === "Space") resetGame();
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") resetGame();
 });
 
 function gameLoop() {
-    updateGame(context, boardWidth, boardHeight);
-    requestAnimationFrame(gameLoop);
+  updateGame(context, boardWidth, boardHeight);
+  requestAnimationFrame(gameLoop);
 }
 function drawBlocks(context) {
     blockArray.forEach(block => {
@@ -32,10 +32,10 @@ function drawBlocks(context) {
     });
 }
 
-
 window.onload = () => {
-    createBlocks(difficulty);
-    gameLoop();
+  createBlocks(difficulty);
+  createPlayer(difficulty);
+  gameLoop();
 };
 
 window.restartGame = restartGame;
