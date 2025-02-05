@@ -10,22 +10,22 @@ export function createPlayer(difficulty) {
         case 'easy':
             playerWidth = 180;
             playerHeight = 20;
-            playerColor = "#c19a6b"; // Warm brown
+            playerColor = "#020e21"; // Warm brown
             break;
         case 'medium':
             playerWidth = 120;
             playerHeight = 20;
-            playerColor = "#77dd77"; // Soft green
+            playerColor = "#054152"; // Soft green
             break;
         case 'hard':
             playerWidth = 80;
             playerHeight = 20;
-            playerColor = "#ff6961"; // Soft red
+            playerColor = "#020e21"; // Soft red
             break;
         default:
             playerWidth = 180;
             playerHeight = 20;
-            playerColor = "#c19a6b"; // Default color
+            playerColor = "#00fff0"; // Default color
     }
 
     player = {

@@ -22,18 +22,18 @@ export function setDifficulty(difficulty) {
     if (difficulty === "easy") {
         ballVelocityX = 2;
         ballVelocityY = 2;
-        ballWidth = 20;
-        ballHeight = 20;
+        ballWidth = 30;
+        ballHeight = 10;
     } else if (difficulty === "medium") {
         ballVelocityX = 5;
         ballVelocityY = 5;
-        ballWidth = 15;
-        ballHeight = 15;
+        ballWidth = 25;
+        ballHeight = 5;
     } else if (difficulty === "hard") {
         ballVelocityX = 8;
         ballVelocityY = 8;
-        ballWidth = 10;
-        ballHeight = 10;
+        ballWidth = 30;
+        ballHeight = 5;
     }
 
     ball.velocityX = ballVelocityX;
