@@ -1,3 +1,5 @@
+import {  player , movePlayer, createPlayer } from "./player.js";
+
 export let ballWidth = 20;
 export let ballHeight = 20;
 export let ballVelocityX = 3;
@@ -101,8 +103,11 @@ export function updateScoreDisplay() {
 }
 
 export function restartBallPosition(canvasWidth, canvasHeight) {
-    ball.x = canvasWidth / 2;
-    ball.y = canvasHeight - ball.height - 80; //  ball starts above bottom ya aya :(
+  //  ball.x = canvasWidth / 2;
+    ball.x = player.x + player.width / 2 - ball.width / 2;  // Center above player
+    //ball.y = canvasHeight - ball.height - 80; //  ball starts above bottom ya aya :(
+     ball.y = player.y - ball.height - 5; // Ball starts just above the player ya aya :(
+
     
      ball.velocityX = 0;
      ball.velocityY = 0;
