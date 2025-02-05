@@ -1,5 +1,5 @@
 import { restartGame } from "./modules/ball.js";
-import { createPlayer, movePlayer , player } from "./modules/player.js";
+import { createPlayer, movePlayer, player } from "./modules/player.js";
 import { ball, updateBall, setDifficulty } from "./modules/ball.js";
 import { createBlocks, blockArray } from "./modules/block.js";
 import { detectCollision } from "./modules/utils.js";
@@ -77,23 +77,37 @@ export function updateGame(context, boardWidth, boardHeight) {
   }
 
   for (let block of blockArray) {
-    if (detectCollision(ball, block) && block.hits < 2) {
+    // Check for collision between the ball and the block
+    if (detectCollision(ball, block)) {
+      if (block.hits === -1) {
+        // Black blocks (unbreakable) just make the ball bounce
+        ball.velocityY *= -1;
+        // Do not change any state of the black block (don't increase hits or color)
+        continue;
+      }
+  
+      // For breakable blocks, increase the hit count and update state
       block.hits += 1;
       ball.velocityY *= -1;
       hitSound.play();
-
-      if (block.hits == 2) {
+  
+      if (block.hits === 2) {
+        // Update score when block is fully destroyed
         score += scoreIncrement;
       }
     }
-
-    if (block.hits < 2) {
+  
+    // Draw blocks, ensuring black blocks are not affected
+    if (block.hits < 2 || block.hits === -1) {
+      // If the block is unbreakable (black), keep its original color
       context.fillStyle = block.hits === 1 ? "white" : block.color;
       context.fillRect(block.x, block.y, block.width, block.height);
     }
   }
-
-  const allBlocksDestroyed = blockArray.every((block) => block.hits >= 2);
+  
+  const allBlocksDestroyed = blockArray.every(
+    (block) => block.hits >= 2 || block.hits === -1
+  );
   if (allBlocksDestroyed) {
     gameWon = true;
     gameOver = true;
@@ -113,9 +127,9 @@ export function resetGame(boardWidth, boardHeight) {
   ball.velocityY = 2;
   createBlocks(difficulty);
   createPlayer(difficulty);
+  updateScoreDisplay();
 }
 
-// Initialize Game
 window.onload = () => {
   createBlocks(difficulty);
   createPlayer(difficulty);

@@ -35,7 +35,6 @@ export function setDifficulty(difficulty) {
     ballWidth = 10;
     ballHeight = 10;
   }
- 
 
   ball.velocityX = ballVelocityX;
   ball.velocityY = ballVelocityY;
@@ -86,10 +85,11 @@ export function restartGame(difficulty) {
   score = 0;
   createBlocks(difficulty);
   updateLivesDisplay();
-  updateScoreDisplay();
+  updateScoreDisplay();  // Ensure score is updated on restart
   restartBallPosition(500, 500);
   document.getElementById("loseMessage").style.display = "none";
   document.getElementById("restartButton").style.display = "none";
+  console.log(score)
 }
 
 export function updateLivesDisplay() {
@@ -102,7 +102,8 @@ export function updateLivesDisplay() {
 export function updateScoreDisplay() {
   const scoreElement = document.getElementById("scoreDisplay");
   if (scoreElement) {
-    scoreElement.textContent = `Score: ${0}`;
+    scoreElement.textContent = `Score: ${score}`;
+    console.log(score)
   }
 }
 
