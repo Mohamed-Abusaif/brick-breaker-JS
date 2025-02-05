@@ -14,16 +14,16 @@ body {
     overflow: hidden;
 }
 
-
+/* Keyframes for gradient animation */
 @keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+/* Canvas Styles */
 #gameCanvas {
     background:  #054152;
-  
     animation: gradientAnimation 8s ease infinite;
     border: 3px solid #ddd;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -47,10 +47,6 @@ body {
     font-weight: bold;
     color: #ffcc00;
     text-shadow: 0px 0px 5px rgba(255, 204, 0, 0.7);
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
 }
 
 /* Paddle Styling */
@@ -63,7 +59,7 @@ body {
     background-color: #ff5722;
 }
 
-/* Bricks */
+/* Bricks Styling */
 .brick {
     background-color: #03a9f4;
     border-radius: 5px;
@@ -162,4 +158,73 @@ body {
 
 #livesDisplay {
     margin-left: 10px;
+}
+
+/* Media Queries for Responsive Layout */
+@media (max-width: 768px) {
+    /* Adjust Canvas Size */
+    #gameCanvas {
+        width: 90%;
+        height: 500px;
+    }
+
+    /* Adjust Score and Lives Display */
+    #scoreLivesContainer {
+        font-size: 18px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #scoreDisplay,
+    #livesDisplay {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    /* Adjust Lose Message */
+    #loseMessage {
+        width: 80%;
+        height: 500px;
+        padding: 20px;
+    }
+
+    /* Adjust Restart Button */
+    #restartButton {
+        font-size: 20px;
+        padding: 12px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjust Canvas Size */
+    #gameCanvas {
+        width: 100%;
+        height: 400px;
+    }
+
+    /* Adjust Score and Lives Display */
+    #scoreLivesContainer {
+        font-size: 16px;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    #scoreDisplay,
+    #livesDisplay {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    /* Adjust Lose Message */
+    #loseMessage {
+        width: 90%;
+        height: 450px;
+        padding: 15px;
+    }
+
+    /* Adjust Restart Button */
+    #restartButton {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
 }

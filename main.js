@@ -1,10 +1,5 @@
 import { createPlayer, movePlayer, player } from "./modules/player.js";
-import {
-  ball,
-  updateBall,
-  setDifficulty,
-  restartGame,
-} from "./modules/ball.js";
+import { ball, updateBall, setDifficulty, restartGame } from "./modules/ball.js";
 import { createBlocks, blockArray } from "./modules/block.js";
 import { detectCollision } from "./modules/utils.js";
 
@@ -26,40 +21,18 @@ board.height = boardHeight;
 
 const hitSound = new Audio("../sounds/soccer-ball-kick-37625.mp3");
 
-let gameStarted = false;
-
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space" && !gameStarted) {
-    gameStarted = true;
-    gameLoop();
-    setDifficulty(difficulty);
-  } else if (e.code !== "Space") {
-    movePlayer(e, boardWidth);
-  }
-});
-
 function detectBounce(ball, block) {
-  if (
-    ball.y + ball.height <= block.y + block.height / 2 &&
-    ball.y + ball.height > block.y
-  ) {
+  if (ball.y + ball.height <= block.y + block.height / 2 && ball.y + ball.height > block.y) {
     ball.velocityY *= -1;
-  } else if (
-    ball.y >= block.y + block.height / 2 &&
-    ball.y < block.y + block.height
-  ) {
+  }
+  else if (ball.y >= block.y + block.height / 2 && ball.y < block.y + block.height) {
     ball.velocityY *= -1;
   }
 
-  if (
-    ball.x + ball.width <= block.x + block.width / 2 &&
-    ball.x + ball.width > block.x
-  ) {
+  if (ball.x + ball.width <= block.x + block.width / 2 && ball.x + ball.width > block.x) {
     ball.velocityX *= -1;
-  } else if (
-    ball.x >= block.x + block.width / 2 &&
-    ball.x < block.x + block.width
-  ) {
+  }
+  else if (ball.x >= block.x + block.width / 2 && ball.x < block.x + block.width) {
     ball.velocityX *= -1;
   }
 }
@@ -156,7 +129,7 @@ export function resetGame(boardWidth, boardHeight) {
 window.onload = () => {
   createBlocks(difficulty);
   createPlayer(difficulty);
-  // gameLoop();
+  gameLoop();
   setDifficulty(difficulty);
 };
 
