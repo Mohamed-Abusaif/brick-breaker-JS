@@ -1,11 +1,12 @@
-export let ballWidth = 15;
-export let ballHeight = 15;
+export let ballWidth = 20;
+export let ballHeight = 20;
 export let ballVelocityX = 3;
 export let ballVelocityY = 2;
 
 export let ball = {
     x: 900 / 2,
-    y: 900 / 2,
+    // y: 900 / 2,
+    y: 900 - ballHeight - 80, //  ball starts above bottom ya aya :(
     width: ballWidth,
     height: ballHeight,
     velocityX: ballVelocityX,
@@ -101,7 +102,13 @@ export function updateScoreDisplay() {
 
 export function restartBallPosition(canvasWidth, canvasHeight) {
     ball.x = canvasWidth / 2;
-    ball.y = canvasHeight / 2;
-    ball.velocityX = ballVelocityX;
-    ball.velocityY = ballVelocityY;
+    ball.y = canvasHeight - ball.height - 80; //  ball starts above bottom ya aya :(
+    
+     ball.velocityX = 0;
+     ball.velocityY = 0;
+
+    setTimeout(() => {
+        ball.velocityX = ballVelocityX;
+        ball.velocityY = ballVelocityY;
+    }, 2000);
 }

@@ -102,7 +102,8 @@ export function resetGame(boardWidth, boardHeight) {
     gameWon = false;
     score = 0;
     ball.x = boardWidth / 2;
-    ball.y = boardHeight / 2;
+//    ball.y = boardHeight / 2;
+    ball.y = boardHeight - ballHeight - 80; 
     ball.velocityX = 3;
     ball.velocityY = 2;
     createBlocks(difficulty);
