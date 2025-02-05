@@ -160,6 +160,19 @@ body {
     margin-left: 10px;
 }
 
+#backButton{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    width: 100px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
 /* Media Queries for Responsive Layout */
 @media (max-width: 768px) {
     /* Adjust Canvas Size */
