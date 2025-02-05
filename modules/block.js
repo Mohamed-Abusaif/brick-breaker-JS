@@ -28,7 +28,7 @@ export function createBlocks(difficulty) {
             createUniformGrid();
     }
 
-    addRandomUnbreakableBlocks(); // Add unbreakable blocks randomly after grid is created
+    //addRandomUnbreakableBlocks(); // Add unbreakable blocks randomly after grid is created
 
     console.log(`Blocks Created: Rows=${blockRows}, Columns=${blockColumns}`);
 }

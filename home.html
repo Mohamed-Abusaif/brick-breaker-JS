@@ -1,223 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- style sheet -->
+    <link rel="stylesheet" href="styles.css" />
+    <title>Brick-Breaker-JS</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breakout Game</title>
-   
-    <style>
-        
-       
-
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(45deg, #020e21, #054152, #00ff90);
-            background-size: 600% 600%;
-            animation: gradientBackground 10s ease infinite;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-attachment: fixed;
-        }
-
-       
-        .page-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            width: 80%;
-            height: 80%;
-            border-radius: 20px;
-            box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2), -15px -15px 30px rgba(255, 255, 255, 0.3);
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-        }
-
-      
-        .left-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 20px;
-            flex-direction: column;
-            text-align: center;
-            box-shadow: inset 15px 15px 30px rgba(0, 0, 0, 0.5), inset -15px -15px 30px rgba(255, 255, 255, 0.1);
-        }
-
-        .left-section h1 {
-            font-size: 48px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #00ff90;
-            text-shadow: 0 0 15px rgba(0, 255, 144, 0.9), 0 0 30px rgba(0, 255, 144, 0.7);
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-      
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .left-section p {
-            font-size: 22px;
-            margin-top: 10px;
-            color: #fff;
-            animation: fadeIn 1.5s ease-in-out;
-            animation-delay: 0.5s;
-        }
-
-      
-        .right-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #222326;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            box-shadow: inset 15px 15px 30px rgba(0, 0, 0, 0.5), inset -15px -15px 30px rgba(255, 255, 255, 0.1);
-        }
-
-        .right-section h2 {
-            font-size: 30px;
-            margin-bottom: 20px;
-            color: #062b35;
-            animation: fadeIn 1.5s ease-in-out;
-            animation-delay: 1s;
-            text-shadow: 0 0 15px rgba(0, 198, 255, 0.9), 0 0 25px rgba(0, 198, 255, 0.6);
-        }
-
-      
-        select {
-            width: 220px;
-            padding: 12px;
-            margin: 15px 0;
-            font-size: 18px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            appearance: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
-        }
-
-        select:hover {
-            background-color: #555;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 198, 255, 1);
-        }
-
-       
-        .play-button {
-            padding: 15px 30px;
-            background-color: #00ff90;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 144, 0.9), 0 0 25px rgba(0, 255, 144, 0.7);
-        }
-
-        .play-button:hover {
-            background-color: #00cc7a;
-            box-shadow: 0 0 30px rgba(0, 255, 144, 1), 0 0 40px rgba(0, 255, 144, 0.5);
-            transform: scale(1.1);
-        }
-
-      
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #333;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #00c6ff;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #00ff90;
-        }
-
-       
-        #particles-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-    </style>
-</head>
-
-<body>
-   
-    <!-- <audio autoplay loop>
-        <source src="./Beat ident.ogg" type="audio/ogg">
-    </audio> -->
-    
-    <div class="page-container">
-        <div class="left-section">
-            <h1>Welcome to Ball Brick Breaker!</h1>
-            <p>Get ready to break the bricks and have fun!</p>
-        </div>
-
-        <div class="right-section">
-            <h2>Select Difficulty Level</h2>
-            <select id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
-            <button class="play-button" onclick="startGame()">Start Game</button>
-        </div>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const difficulty = urlParams.get("difficulty") || "easy"; // Default to "easy"
+    </script>
+  </head>
+  <body>
+    <!-- Start Message -->
+    <div id="startMessage" style="text-align: center; font-size: 24px">
+      <p>Please press Space to start</p>
     </div>
 
-   
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="scoreLivesContainer">
+      <div id="scoreDisplay">Score: 0</div>
+      <div id="livesDisplay">Lives: 3</div>
+    </div>
+
+    <div id="loseMessage" style="display: none; text-align: center">
+      <p>Game Over!</p>
+      <button id="restartButton" style="display: none" onclick="resetGame()">
+        Restart
+      </button>
+    </div>
+
     <div id="particles-js"></div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-    <script>
-       
-        particlesJS.load('particles-js', 'particles.json', function () {
-            console.log('callback - particles.js config loaded');
-        });
-
-        function startGame() {
-            document.location.href = "./index.html";
-            const difficulty = document.getElementById("difficulty").value;
-            localStorage.setItem('selectedDifficulty', difficulty); // Store in localStorage
-            //document.location.href = `./index.html?difficulty=${difficulty}`;
-
-        }
-    </script>
-   
-</body>
-
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
