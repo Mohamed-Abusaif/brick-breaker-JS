@@ -8,11 +8,11 @@ export let ballVelocityY = 2;
 
 export let ball = {
   x: 900 / 2,
-  y: 900 - ballHeight - 80, 
+  y: 900 - ballHeight - 80,
   width: ballWidth,
   height: ballHeight,
   velocityX: ballVelocityX,
-  velocityY: ballVelocityY
+  velocityY: ballVelocityY,
 };
 
 export let lives = 3;
@@ -85,11 +85,11 @@ export function restartGame(difficulty) {
   score = 0;
   createBlocks(difficulty);
   updateLivesDisplay();
-  updateScoreDisplay();  // Ensure score is updated on restart
+  updateScoreDisplay(); // Ensure score is updated on restart
   restartBallPosition(500, 500);
   document.getElementById("loseMessage").style.display = "none";
   document.getElementById("restartButton").style.display = "none";
-  console.log(score)
+  console.log(score);
 }
 
 export function updateLivesDisplay() {
@@ -103,19 +103,14 @@ export function updateScoreDisplay() {
   const scoreElement = document.getElementById("scoreDisplay");
   if (scoreElement) {
     scoreElement.textContent = `Score: ${score}`;
-    console.log(score)
+    console.log(score);
   }
 }
-
 export function restartBallPosition(canvasWidth, canvasHeight) {
   ball.x = player.x + player.width / 2 - ball.width / 2; // Center above player
   ball.y = player.y - ball.height - 5; // Ball starts just above the player
 
-  ball.velocityX = 0;
-  ball.velocityY = 0;
-
-  setTimeout(() => {
-    ball.velocityX = ballVelocityX;
-    ball.velocityY = ballVelocityY;
-  }, 200);
+  // Immediately set velocity without delay
+  ball.velocityX = ballVelocityX;
+  ball.velocityY = ballVelocityY;
 }
