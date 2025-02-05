@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- style sheet -->
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Brick-Breaker-JS</title>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const difficulty = urlParams.get("difficulty") || "easy"; // Default to "easy" 
-        
+      const urlParams = new URLSearchParams(window.location.search);
+      const difficulty = urlParams.get("difficulty") || "easy"; 
     </script>
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
 
-</head>
-<body>
-    <!-- <audio autoplay loop>
-        <source src="./Polka ident.ogg" type="audio/ogg">
-    </audio> -->
-   
-    
-    <canvas id="gameCanvas">
-       
-        
-    </canvas>
-    
+    <div id="startMessage" style="text-align: center; font-size: 24px">
+      <p>Please press Space to start</p>
+    </div>
+
     <div id="scoreLivesContainer">
-        <div id="scoreDisplay">Score: 0</div>
-        <div id="livesDisplay">Lives: 3</div>
+      <div id="scoreDisplay">Score: 0</div>
+      <div id="livesDisplay">Lives: 3</div>
     </div>
-   
-    <div id="loseMessage" style="display: none; text-align: center;">
-        <p>Game Over!</p>
-        <button id="restartButton" style="display: none;" onclick="resetGame()">Restart</button>
-    </div>
-    <div id="particles-js"></div>
 
+    <div id="loseMessage" style="display: none; text-align: center">
+      <p>Game Over!</p>
+      <button id="restartButton" style="display: none" onclick="resetGame()">
+        Restart
+      </button>
+    </div>
+
+    <div id="particles-js"></div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module" src="main.js"></script>
-</body>
+  </body>
 </html>

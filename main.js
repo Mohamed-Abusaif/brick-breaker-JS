@@ -1,10 +1,16 @@
 import { createPlayer, movePlayer, player } from "./modules/player.js";
-import { ball, updateBall, setDifficulty, restartGame } from "./modules/ball.js";
+import {
+  ball,
+  updateBall,
+  setDifficulty,
+  restartGame,
+} from "./modules/ball.js";
 import { createBlocks, blockArray } from "./modules/block.js";
 import { detectCollision } from "./modules/utils.js";
 
 const board = document.getElementById("gameCanvas");
 const difficulty = localStorage.getItem("selectedDifficulty") || "easy";
+console.log(difficulty);
 const context = board.getContext("2d");
 const boardWidth = 750;
 const boardHeight = 750;
@@ -21,27 +27,13 @@ board.height = boardHeight;
 
 const hitSound = new Audio("../sounds/soccer-ball-kick-37625.mp3");
 
-function detectBounce(ball, block) {
-  if (ball.y + ball.height <= block.y + block.height / 2 && ball.y + ball.height > block.y) {
-    ball.velocityY *= -1;
-  }
-  else if (ball.y >= block.y + block.height / 2 && ball.y < block.y + block.height) {
-    ball.velocityY *= -1;
-  }
-
-  if (ball.x + ball.width <= block.x + block.width / 2 && ball.x + ball.width > block.x) {
-    ball.velocityX *= -1;
-  }
-  else if (ball.x >= block.x + block.width / 2 && ball.x < block.x + block.width) {
-    ball.velocityX *= -1;
-  }
-}
-
+// Game Loop
 function gameLoop() {
   updateGame(context, boardWidth, boardHeight);
   requestAnimationFrame(gameLoop);
 }
 
+// Draw Blocks
 function drawBlocks(context) {
   blockArray.forEach((block) => {
     context.fillStyle = block.color;
@@ -49,6 +41,7 @@ function drawBlocks(context) {
   });
 }
 
+// Update Game
 export function updateGame(context, boardWidth, boardHeight) {
   if (gameOver) {
     context.clearRect(0, 0, boardWidth, boardHeight);
@@ -90,7 +83,7 @@ export function updateGame(context, boardWidth, boardHeight) {
   for (let block of blockArray) {
     if (detectCollision(ball, block) && block.hits < 2) {
       block.hits += 1;
-      detectBounce(ball, block);
+      ball.velocityY *= -1;
       hitSound.play();
 
       if (block.hits == 2) {
@@ -113,6 +106,7 @@ export function updateGame(context, boardWidth, boardHeight) {
   document.getElementById("scoreDisplay").innerText = `Score: ${score}`;
 }
 
+// Reset Game
 export function resetGame(boardWidth, boardHeight) {
   gameOver = false;
   gameWon = false;
@@ -126,6 +120,7 @@ export function resetGame(boardWidth, boardHeight) {
   restartGame(difficulty);
 }
 
+// Initialize Game
 window.onload = () => {
   createBlocks(difficulty);
   createPlayer(difficulty);
@@ -137,8 +132,10 @@ document.addEventListener("keydown", (e) => movePlayer(e, boardWidth));
 
 document.getElementById("scoreDisplay").innerText = `Score: 0`;
 
+// Restart Game
 window.resetGame = resetGame;
 
+// Difficulty Selection
 document.addEventListener("DOMContentLoaded", function () {
   const difficultyElement = document.getElementById("difficulty");
 
