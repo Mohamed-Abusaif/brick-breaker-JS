@@ -20,18 +20,18 @@ export let score = 0;
 
 export function setDifficulty(difficulty) {
   if (difficulty === "easy") {
-    ballVelocityX = 2;
-    ballVelocityY = 2;
+    ballVelocityX = 5;
+    ballVelocityY = 5;
     ballWidth = 20;
     ballHeight = 20;
   } else if (difficulty === "medium") {
-    ballVelocityX = 5;
-    ballVelocityY = 5;
+    ballVelocityX = 10;
+    ballVelocityY = 10;
     ballWidth = 15;
     ballHeight = 15;
   } else if (difficulty === "hard") {
-    ballVelocityX = 8;
-    ballVelocityY = 8;
+    ballVelocityX = 15;
+    ballVelocityY = 15;
     ballWidth = 10;
     ballHeight = 10;
   }
