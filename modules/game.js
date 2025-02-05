@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (difficultyElement) {
     difficultyElement.value = difficulty;
   }
-  setDifficulty(difficulty); // ✅ Apply the difficulty settings properly
+  setDifficulty(difficulty);  
 
 });
 
@@ -24,22 +24,37 @@ let ballSpeedy = 2;
 let scoreIncrement = 50;
 
 if (difficulty === "easy") {
-  ballSpeedx = 2;
-  ballSpeedy = 2;
   scoreIncrement = 50;
 } else if (difficulty === "medium") {
-  ballSpeedx = 6;
-  ballSpeedy = 5;
+
   scoreIncrement = 100;
 } else if (difficulty === "hard") {
-  ballSpeedx = 9;
-  ballSpeedy = 10;
+
   scoreIncrement = 150;
 }
 
-//ball.velocityX = ballSpeedx;
-//ball.velocityY = ballSpeedy;
-setDifficulty(difficulty); // ✅ This properly sets ball velocity
+setDifficulty(difficulty); // 
+
+function detectbounce (){
+   // Ball hit the block from the top (reversing Y direction)
+   if (ball.y + ball.height <= block.y + block.height / 2 && ball.y + ball.height > block.y) {
+    ball.velocityY *= -1; // Reverse Y direction
+}
+// Ball hit the block from the bottom (reversing Y direction)
+else if (ball.y >= block.y + block.height / 2 && ball.y < block.y + block.height) {
+    ball.velocityY *= -1; // Reverse Y direction
+}
+
+// Ball hit the block from the left (reversing X direction)
+if (ball.x + ball.width <= block.x + block.width / 2 && ball.x + ball.width > block.x) {
+    ball.velocityX *= -1; // Reverse X direction
+}
+// Ball hit the block from the right (reversing X direction)
+else if (ball.x >= block.x + block.width / 2 && ball.x < block.x + block.width) {
+    ball.velocityX *= -1; // Reverse X direction
+}
+}
+
 
 
 export function updateGame(context, boardWidth, boardHeight) {
@@ -86,6 +101,8 @@ export function updateGame(context, boardWidth, boardHeight) {
       block.hits += 1;
 
       ball.velocityY *= -1;
+      detectbounce ;
+
       hitSound.play();
 
       if (block.hits == 2) {

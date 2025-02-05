@@ -25,13 +25,13 @@ export function setDifficulty(difficulty) {
         ballWidth = 30;
         ballHeight = 10;
     } else if (difficulty === "medium") {
-        ballVelocityX = 5;
-        ballVelocityY = 5;
+        ballVelocityX = 4;
+        ballVelocityY = 4;
         ballWidth = 25;
         ballHeight = 5;
     } else if (difficulty === "hard") {
-        ballVelocityX = 8;
-        ballVelocityY = 8;
+        ballVelocityX = 6;
+        ballVelocityY = 6;
         ballWidth = 30;
         ballHeight = 5;
     }
