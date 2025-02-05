@@ -35,6 +35,7 @@ export function setDifficulty(difficulty) {
     ballWidth = 10;
     ballHeight = 10;
   }
+ 
 
   ball.velocityX = ballVelocityX;
   ball.velocityY = ballVelocityY;
