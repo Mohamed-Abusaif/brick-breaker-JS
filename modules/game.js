@@ -1,5 +1,5 @@
 import {  player , movePlayer, createPlayer } from "./player.js";
-import { ball, updateBall } from "./ball.js";
+import { ball, updateBall,setDifficulty} from "./ball.js";
 import { blockArray, createBlocks, blockColumns, blockRows } from "./block.js";
 import { detectCollision } from "./utils.js";
 
@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (difficultyElement) {
     difficultyElement.value = difficulty;
   }
+  setDifficulty(difficulty); // ✅ Apply the difficulty settings properly
+
 });
 
 let score = 0;
@@ -35,8 +37,10 @@ if (difficulty === "easy") {
   scoreIncrement = 150;
 }
 
-ball.velocityX = ballSpeedx;
-ball.velocityY = ballSpeedy;
+//ball.velocityX = ballSpeedx;
+//ball.velocityY = ballSpeedy;
+setDifficulty(difficulty); // ✅ This properly sets ball velocity
+
 
 export function updateGame(context, boardWidth, boardHeight) {
   if (gameOver) {
