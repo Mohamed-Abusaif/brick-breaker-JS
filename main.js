@@ -10,7 +10,6 @@ import { detectCollision } from "./modules/utils.js";
 
 const board = document.getElementById("gameCanvas");
 const difficulty = localStorage.getItem("selectedDifficulty") || "easy";
-console.log(difficulty);
 const context = board.getContext("2d");
 const boardWidth = 750;
 const boardHeight = 750;
@@ -27,21 +26,32 @@ board.height = boardHeight;
 
 const hitSound = new Audio("../sounds/soccer-ball-kick-37625.mp3");
 
+let gameStarted = false;
+const startMessage = document.getElementById("startMessage");
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space" && !gameStarted) {
+    gameStarted = true;
+    startMessage.style.display = "none"; // Hide the start message
+    initializeGame(); // Initialize game elements and start the game loop
+  } else if (e.code !== "Space") {
+    movePlayer(e, boardWidth); // Move the player for other keys
+  }
+});
+
+function initializeGame() {
+  createBlocks(difficulty); // Create blocks
+  createPlayer(difficulty); // Create player
+  setDifficulty(difficulty); // Set difficulty
+  gameLoop(); // Start game loop
+}
+
 // Game Loop
 function gameLoop() {
-  updateGame(context, boardWidth, boardHeight);
-  requestAnimationFrame(gameLoop);
+  updateGame(context, boardWidth, boardHeight); // Update game state
+  requestAnimationFrame(gameLoop); // Continue game loop
 }
 
-// Draw Blocks
-function drawBlocks(context) {
-  blockArray.forEach((block) => {
-    context.fillStyle = block.color;
-    context.fillRect(block.x, block.y, block.width, block.height);
-  });
-}
-
-// Update Game
 export function updateGame(context, boardWidth, boardHeight) {
   if (gameOver) {
     context.clearRect(0, 0, boardWidth, boardHeight);
@@ -80,7 +90,7 @@ export function updateGame(context, boardWidth, boardHeight) {
     ball.y = player.y - ball.height;
   }
 
-  for (let block of blockArray) {
+  blockArray.forEach((block) => {
     if (detectCollision(ball, block) && block.hits < 2) {
       block.hits += 1;
       ball.velocityY *= -1;
@@ -95,7 +105,7 @@ export function updateGame(context, boardWidth, boardHeight) {
       context.fillStyle = block.hits === 1 ? "white" : block.color;
       context.fillRect(block.x, block.y, block.width, block.height);
     }
-  }
+  });
 
   const allBlocksDestroyed = blockArray.every((block) => block.hits >= 2);
   if (allBlocksDestroyed) {
@@ -105,42 +115,3 @@ export function updateGame(context, boardWidth, boardHeight) {
 
   document.getElementById("scoreDisplay").innerText = `Score: ${score}`;
 }
-
-// Reset Game
-export function resetGame(boardWidth, boardHeight) {
-  gameOver = false;
-  gameWon = false;
-  score = 0;
-  ball.x = player.x + player.width / 2 - ball.width / 2;
-  ball.y = player.y - ball.height - 5;
-  ball.velocityX = 3;
-  ball.velocityY = 2;
-  createBlocks(difficulty);
-  createPlayer(difficulty);
-  restartGame(difficulty);
-}
-
-// Initialize Game
-window.onload = () => {
-  createBlocks(difficulty);
-  createPlayer(difficulty);
-  gameLoop();
-  setDifficulty(difficulty);
-};
-
-document.addEventListener("keydown", (e) => movePlayer(e, boardWidth));
-
-document.getElementById("scoreDisplay").innerText = `Score: 0`;
-
-// Restart Game
-window.resetGame = resetGame;
-
-// Difficulty Selection
-document.addEventListener("DOMContentLoaded", function () {
-  const difficultyElement = document.getElementById("difficulty");
-
-  if (difficultyElement) {
-    difficultyElement.value = difficulty;
-  }
-  setDifficulty(difficulty);
-});

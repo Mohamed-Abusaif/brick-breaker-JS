@@ -3,20 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- style sheet -->
     <link rel="stylesheet" href="styles.css" />
     <title>Brick-Breaker-JS</title>
 
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      const difficulty = urlParams.get("difficulty") || "easy"; 
+      const difficulty = urlParams.get("difficulty") || "easy"; // Default to "easy"
     </script>
   </head>
   <body>
-    <canvas id="gameCanvas"></canvas>
-
+    <!-- Start Message -->
     <div id="startMessage" style="text-align: center; font-size: 24px">
       <p>Please press Space to start</p>
     </div>
+
+    <canvas id="gameCanvas"></canvas>
 
     <div id="scoreLivesContainer">
       <div id="scoreDisplay">Score: 0</div>
@@ -31,6 +33,7 @@
     </div>
 
     <div id="particles-js"></div>
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module" src="main.js"></script>
   </body>
