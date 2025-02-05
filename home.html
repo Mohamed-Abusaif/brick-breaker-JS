@@ -23,7 +23,11 @@
     <div id="scoreLivesContainer">
       <div id="scoreDisplay">Score: 0</div>
       <div id="livesDisplay">Lives: 3</div>
+      <div>
+        <button id="backButton">Back</button>
+      </div>
     </div>
+    
 
     <div id="loseMessage" style="display: none; text-align: center">
       <p>Game Over!</p>
@@ -36,5 +40,11 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script type="module" src="main.js"></script>
+    <script>
+        const backButton = document.getElementById("backButton");
+        backButton.addEventListener("click", function() {
+        window.location.href = "index.html";
+  });
+    </script>
   </body>
 </html>
